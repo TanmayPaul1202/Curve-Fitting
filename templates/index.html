@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Curve Fitting Solver</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="container">
+      <h1>Curve Fitting Solver</h1>  
+      <p class="subtitle">Fit Linear, Quadratic, Exponential, Logarithmic, and Power curves</p>
+    </header>
+
+    <!-- Input Controls -->                  
+    <main class="container card">
+      <section class="controls">
+        <div class="row">
+          <label for="nInput">Total number of observations (N)</label>
+          <input id="nInput" type="number" min="1" step="1" placeholder="e.g., 5" />
+          <button id="setNBtn" class="primary">Set N</button>
+        </div>
+        <small class="hint">After setting N, enter exactly N pairs of x and y below.</small>
+      </section>
+
+      <!-- Dynamic XY Table -->
+      <section>
+        <div id="xyContainer" class="xy-container hidden">
+          <div class="xy-header">
+            <div>#</div>
+            <div>x</div>
+            <div>y</div>
+          </div>
+          <div id="xyRows"></div>
+        </div>
+      </section>
+
+      <!-- Action Buttons -->
+      <section id="actions" class="actions hidden">
+        <div class="button-grid">
+          <button data-fit="linear" class="outline">Linear Fit</button>
+          <button data-fit="quadratic" class="outline">Quadratic Fit</button>
+          <button data-fit="exponential" class="outline">Exponential (y = a e^{bx})</button>
+          <button data-fit="logarithmic" class="outline">Logarithmic (y = a + b ln x)</button>
+          <button data-fit="power" class="outline">Power (y = a x^b)</button>
+          <button id="solveAll" class="primary">Solve All</button>
+        </div>
+      </section>
+
+      <!-- Results -->
+      <section id="results" class="results hidden"></section>
+    </main>
+
+    <footer class="container footer">
+      <small>Clean • Minimal • Educational</small>
+    </footer>
+
+    <script src="/static/app.js"></script>
+  </body>
+  </html>
+
+
+
