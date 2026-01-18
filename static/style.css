@@ -1,0 +1,89 @@
+:root {
+  --bg: #ede7e3;       /* background */
+  --text: #262626;     /* normal text */
+  --muted: #53443c;    /* muted text (similar to heading) */
+  --heading: #53443c;  /* heading text */
+  --accent: #97C5E2;   /* accent color (borders) */ 
+  --accent-ghost: #BCE1F5; /* light accent */
+  --card: #ffffff;     /* card background */
+  --border: #97C5E2;   /* borders */
+  --solution-box: #BCE1F5; /* solution boxes */
+  --answer-box: #D9EDF9;   /* final answer box */
+  --answer-accent: #97C5E2; /* answer box accent */
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; background: var(--bg); color: var(--text); }
+
+.container { width: 100%; max-width: 960px; margin: 0 auto; padding: 28px; }
+header { text-align: center; }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); padding: 8px; }
+
+h1 { margin: 0; font-size: 30px; letter-spacing: -0.02em; color: var(--heading); font-weight: 750; text-align: center; }
+.subtitle { color: var(--muted); margin-top: 6px; text-align: center; }
+
+.controls .row { display: flex; gap: 12px; align-items: center; margin-top: 14px; }
+label { font-weight: 600; }
+input[type="number"], input[type="text"] { padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px; background: #fff; width: 200px; color: var(--text); }
+input:focus { outline: 2px solid var(--accent-ghost); border-color: var(--border); }
+.hint { color: var(--muted); }
+
+button { cursor: pointer; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--border); background: #fff; transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease; min-height: 42px; color: var(--text); }
+button.primary { background: var(--border); color: var(--text); border-color: var(--border); }
+button.primary:hover { background: var(--accent-ghost); border-color: var(--border); }
+button.outline { background: #fff; border-color: var(--border); color: var(--text); }
+button.outline:hover { background: var(--accent-ghost); }
+button[data-fit] { border-color: var(--border); color: var(--text); }
+button#solveAll { background: var(--border); border-color: var(--border); color: var(--text); }
+button#solveAll:hover { background: var(--accent-ghost); border-color: var(--border); }
+
+.xy-container { margin-top: 18px; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.xy-header, .xy-row { display: grid; grid-template-columns: 64px 1fr 1fr; gap: 12px; align-items: center; padding: 12px 14px; }
+.xy-header { background: var(--accent-ghost); font-weight: 650; color: var(--heading); }
+.xy-row { border-top: 1px solid var(--border); background: #fff; }
+.xy-row:nth-child(even) { background: var(--accent-ghost); }
+.xy-row input { width: 100%; }
+
+.actions { margin-top: 18px; }
+.button-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 720px) { 
+  .button-grid { grid-template-columns: 1fr; }
+  .xy-header, .xy-row { grid-template-columns: 48px 1fr 1fr; }
+  input[type="number"], input[type="text"] { width: 100%; }
+}
+
+.results { margin-top: 24px; display: grid; gap: 16px; }
+.result { border: 1px solid var(--border); background: var(--solution-box); border-radius: 8px; padding: 16px; line-height: 1.55; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); }
+.result.best { border-color: var(--border); background: var(--solution-box); border-left: 6px solid var(--border); }
+.result h3 { margin: 0 0 6px 0; font-size: 18px; color: var(--heading); }
+.result .meta { color: var(--muted); }
+.result .equation { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; background: #fff; padding: 6px 8px; display: inline-block; border-radius: 6px; }
+.result .steps { margin-top: 8px; padding-left: 18px; }
+
+/* Notebook-style solution area */
+.solution-section { margin-top: 10px; }
+.solution-table-wrap { margin-top: 10px; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.solution-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.solution-table th, .solution-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); text-align: left; }
+.solution-table thead th { background: var(--accent-ghost); font-weight: 600; color: var(--heading); }
+.solution-table tbody tr:nth-child(even) { background: var(--accent-ghost); }
+.solution-pre { margin-top: 10px; border: 1px dashed var(--border); background: #fff; border-radius: 8px; padding: 10px; }
+.solution-pre pre { margin: 0; white-space: pre-wrap; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; color: var(--text); }
+.final-equation { margin-top: 12px; padding: 10px 12px; border: 1px solid var(--border); background: #fff; border-radius: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+
+/* Small inline best-fit card shown after each solution when solving all */
+.result.mini { padding: 10px; margin-top: 10px; }
+.result.mini .mini-title { margin: 0 0 4px 0; font-size: 16px; }
+
+.fade-in { animation: fadeIn 240ms ease-out; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+.hidden { display: none; }
+
+.footer { text-align: center; color: var(--muted); }
+
+/* Overall best answer box: lighter variant */
+.result.overall { border-color: var(--border); background: var(--answer-box); border-left: 6px solid var(--answer-accent); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); }
+
+
+
